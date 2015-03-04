@@ -1,3 +1,10 @@
+#---------------------------------------------
+# TINT2 CONFIG FILE
+#---------------------------------------------
+
+#---------------------------------------------
+# BACKGROUND AND BORDER
+#---------------------------------------------
 # ID 1
 rounded = 0
 border_width = 1
@@ -77,7 +84,7 @@ clock_font_color = #c5c8c6 100
 clock_tooltip = 
 clock_padding = 10 0
 clock_background_id = 0
-clock_lclick_command = gsimplecal
+clock_lclick_command = ontimepress
 time1_timezone = 
 time2_timezone = 
 clock_tooltip_timezone = 
