@@ -1,0 +1,26 @@
+@-moz-document regexp("(.*wikipedia.org/wiki/(?!.*:)(?!Main_Page).*)|(.*secure.wikimedia.org/wikipedia/../wiki/(?!.*:)(?!Main_Page).*)") {
+  /* All fonts */
+  *,
+  html,
+  body,
+  #content{
+   font-family: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;; 
+   font-weight: 400;
+  }
+  
+  /* Japanese fonts */
+  *:lang(jp){
+    font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif !important;;
+  }
+  
+  /* Chinese fonts */
+  :lang(cn){
+    font-family: Tahoma, Helvetica, Arial, "Microsoft Yahei","微软雅黑", STXihei, "华文细黑", sans-serif !important;
+  }
+  
+  /* Ukrainian and Russian fonts */
+  *:lang(ru),
+  *:lang(uk){
+    font-family: "Geneva CY", "Helvetica CY", "Arial", sans-serif !important; 
+  }
+}
