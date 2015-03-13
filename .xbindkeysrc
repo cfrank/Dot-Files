@@ -1,0 +1,14 @@
+# c173
+# Move to previous track in MPD
+"mpc prev"
+    m:0x0 + c:173
+
+# c:172
+# Pause track in MPD
+"mpc pause"
+    m:0x0 + c:172
+
+# c:171
+# Move to the next track in MPD
+"mpc next"
+    m:0x0 + c:171
