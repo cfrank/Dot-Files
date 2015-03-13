@@ -5,7 +5,7 @@
 
 # c:172
 # Pause track in MPD
-"mpc pause"
+"mpc toggle"
     m:0x0 + c:172
 
 # c:171
