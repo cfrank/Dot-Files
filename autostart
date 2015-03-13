@@ -143,8 +143,8 @@ hc attr theme.background_color '#141414'
 
 hc set window_gap 0
 hc set frame_gap 15
-hc set snap_distance 2
-hc set snap_gap 2
+hc set snap_distance 0
+hc set snap_gap 0
 hc set frame_padding 0
 hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 1
@@ -178,5 +178,11 @@ herbstclient set tree_style '╾│ ├└╼─┐'
 nitrogen --restore &
 # Comton (Shadow Manager)
 compton -r 4 -o 0.50 -l -4 -t -4 -c --config ~/.config/compton-tint.conf -b &
+# xbindkeys (Basically used only for media keys)
+xbindkeys &
 # Tint2 (Top bar)
 tint2 &
+# Remove tap-click with synclient
+synclient TapButton1=0 &
+synclient TapButton2=0 &
+synclient TapButton3=0 &
