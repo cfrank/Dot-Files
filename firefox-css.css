@@ -4,7 +4,10 @@
 
 #main-window 
   {
-  margin-right: -7px !important;
+  /* This was set to -7px for 
+   * some uknown reason...
+   */
+  margin-right: 0px !important;
   }
 
 .tabbrowser-tab .tab-icon-image
