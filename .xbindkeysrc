@@ -1,10 +1,10 @@
-# c173
+# c:173
 # Move to previous track in MPD
 "mpc prev"
     m:0x0 + c:173
 
 # c:172
-# Pause track in MPD
+# Toggle track in MPD (start - stop)
 "mpc toggle"
     m:0x0 + c:172
 
