@@ -1,14 +1,14 @@
-# c:173
-# Move to previous track in MPD
-"mpc prev"
-    m:0x0 + c:173
+# m:0x10 + x:121
+# Toggle the master volume
+"amixer set Master toggle"
+    Mod2 + XF86AudioMute
 
-# c:172
-# Toggle track in MPD (start - stop)
-"mpc toggle"
-    m:0x0 + c:172
+# m:0x10 + x:122
+# Decrease the master volume
+"amixer set Master 5-"
+    Mod2 + XF86AudioLowerVolume
 
-# c:171
-# Move to the next track in MPD
-"mpc next"
-    m:0x0 + c:171
+# m:0x10 + x:123
+# Increase the master volume
+"amixer set Master 5+"
+    Mod2 + XF86AudioRaiseVolume
