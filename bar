@@ -16,6 +16,9 @@ SIZE="1920x20"
 # Size of the underline
 ULINE="1"
 
+# Timeout
+TIMEOUT=0.5
+
 # Background color
 BG="#1d1f21"
 
@@ -112,5 +115,5 @@ function bar {
 
 while :; do
     echo $(bar)
-    sleep 0.5
+    sleep $TIMEOUT
 done | lemonbar -g $SIZE -u $ULINE -f $FONT2 -f $FONT1 -B $BG
