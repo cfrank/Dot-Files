@@ -16,6 +16,9 @@ Basically the default file, but with xbindkeys added on boot
 #### 4chan-style.json
 AppchanX theme file
 
+#### bar
+Panel script for use with [LemonBoy/bar](https://github.com/LemonBoy/bar)
+
 #### config
 NCMPCPP configuration file
 
