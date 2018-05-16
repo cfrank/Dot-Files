@@ -1,119 +1,85 @@
+# vim: ts=4 syntax=sh
 #!/usr/bin/env bash
 
-#
-# Author: Mysall
-#
-
-# Font for all text
+# Text font
 FONT1="-lucy-tewi-medium-r-normal--11-90-100-100-c-60-ISO10646-1"
+# FONT1="-benis-uushi-medium-R-Normal--11-90-75-75-P-58-ISO10646-1"
+# FONT1="Metis:style=Regular"
 
-# Icon fon
-FONT2="-wuncon-siji-medium-r-normal--10-100-75-75-C-80-ISO10646-1"
 
-# Bar size
-SIZE="1920x20"
+# Icon font
+FONT2="-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1"
 
-# Size of the underline
-ULINE="1"
+# Size of the bar
+# (Screen width - border width x bar height)
+SIZE="1920x25"
 
-# Timeout
+# Border width
+# This requires a fork of lemonbar (dark-yux/bar)
+BORDER_WIDTH=0
+
+# Debounce timeout
 TIMEOUT=0.5
 
-# Background color
-BG="#1d1f21"
+# Background Color
+BG="#09090d"
+
+# Icon Background color
+IB="#383851"
+
+# Content Background color
+CB="#484868"
 
 # Foreground color
-FG="#c5c8c6"
+FG="#d9d9fc"
 
-# Icon background color
-#IB="#316b59"
-IB="#111213"
-
-# First desktop icon (Computer)
-fdi="\ue1d7"
-
-# Second desktop icon (Code)
-sdi="\ue00a"
-
-# Third desktop icon (Code)
-tdi="\ue1ef"
-
-# Last desktop icon (Folder)
-ldi="\ue1e0"
-
-# Mail desktop icon (Mail)
-mdi="\ue229"
-
-# The icon for the date
-ci="\ue266"
-
-# Temperature icon
-cpui="\ue0ce"
-
-# Volume mute icon
-vmi="\ue04f"
-
-# Volume icon
-vi="\ue05d"
-
-# Time icon
-ti="\ue0a3"
-# Start the bar script
+# Border Color
+BORDER_COLOR=$BG
 
 function bar {
-    
-    # Show an icon which relates to the current desktop
-    function desktop {
-        # Find the current desktop (0 index)
-        CURRENT=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
+	function icon {
+		ICON="\ue19d"
+		echo -e %{B$IB}%{F$FG} $ICON%{F-}
+	}
 
-        case $CURRENT in
-            # First
-            0) echo -e %{B$IB}%{F$FG} $fdi %{B$BG}%{F$FG} $sdi %{B$BG}%{F$FG} $tdi %{B$BG}%{F$FG} $ldi %{B$BG}%{F$FG} $mdi %{F-};;
-            1) echo -e %{B$BG}%{F$FG} $fdi %{B$IB}%{F$FG} $sdi %{B$BG}%{F$FG} $tdi %{B$BG}%{F$FG} $ldi %{B$BG}%{F$FG} $mdi %{F-};;
-            2) echo -e %{B$BG}%{F$FG} $fdi %{B$BG}%{F$FG} $sdi %{B$IB}%{F$FG} $tdi %{B$BG}%{F$FG} $ldi %{B$BG}%{F$FG} $mdi %{F-};;
-            3) echo -e %{B$BG}%{F$FG} $fdi %{B$BG}%{F$FG} $sdi %{B$BG}%{F$FG} $tdi %{B$IB}%{F$FG} $ldi %{B$BG}%{F$FG} $mdi %{F-};;
-            4) echo -e %{B$BG}%{F$FG} $fdi %{B$BG}%{F$FG} $sdi %{B$BG}%{F$FG} $tdi %{B$BG}%{F$FG} $ldi %{B$IB}%{F$FG} $mdi %{F-} 
-        esac
-    }
+	function desktop {
+		CURRENT=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
 
-    # Show the date
-    function timedisplay {
-        DATE=$(date "+%A %b %d %Y")
-        echo -e %{B$IB}%{F$FG} $ci %{B$BG}%{F$FG} $DATE %{F-}
-    }
+		# With the current desktop we update the indicator
+		case $CURRENT in
+			0) echo -e %{B$BG}%{F$FG} +------%{F-};;
+			1) echo -e %{B$BG}%{F$FG} -+-----%{F-};;
+			2) echo -e %{B$BG}%{F$FG} --+----%{F-};;
+			3) echo -e %{B$BG}%{F$FG} ---+---%{F-};;
+			4) echo -e %{B$BG}%{F$FG} ----+--%{F-};;
+			5) echo -e %{B$BG}%{F$FG} -----+-%{F-};;
+			6) echo -e %{B$BG}%{F$FG} ------+%{F-}
+		esac
+	}
 
-    # Show the cpu temperature
-    function cpuTemp {
-        TEMP=$(sensors | grep "Physical id 0" | cut -d'+' -f2 | head -c2) 
-        echo -e %{B$IB}%{F$FG} $cpui %{B$BG}%{F$FG} $TEMP %{F-}
-    }
+	function window {
+		# Requires xdotool
+		WINDOW=$(xdotool getwindowfocus getwindowname)
 
-    # Show the time
-    function volume {
-        VOL_PERC=$(amixer get Master | grep '%' | awk '{gsub(/[\[\]%]/,""); print $4}')
-        VOL_STAT=$(amixer get Master | grep '%' | awk '{gsub(/[\[\]]/,""); print $6}')
+		echo %{F"#839496"}$WINDOW
+	}
 
-        # Check if the volume is muted
-        if [ $VOL_STAT == "on" ]; 
-        then
-            echo -e %{B$IB}%{F$FG} $vi %{B$BG}%{F$FG} $VOL_PERC% %{F-}
-        else
-            echo -e %{B$IB}%{F$FG} $vmi %{B$BG}%{F$FG} Mute %{F-}
-        fi 
+	function calendar {
+		ICON="\ue267"
+		CALENDAR=$(date "+%a %m/%d/%Y")
+		echo -e %{B$IB}%{F$FG} $ICON %{B$CB}%{F$FG} $CALENDAR%{F-}
+	}
 
-    }
+	function watch {
+		ICON="\ue0a3"
+		WATCH=$(date "+%H:%M")
+		echo -e %{B$IB}%{F$FG} $ICON %{B$CB}%{F$FG} $WATCH%{F-}
+	}
 
-    # Show the time
-    function currentTime {
-        TIME=$(date "+%H:%M:%S")
-        echo -e %{B$IB}%{F$FG} $ti %{B$BG}%{F$FG} $TIME %{F-}
-    }
-
-    echo "%{l}$(desktop)%{c}$(timedisplay)%{r}$(cpuTemp)$(volume)$(currentTime)"
+	echo -e %{l}$(icon) $(desktop) %{c}$(window) %{r}$(calendar) %{B$BG} $(watch) %{B$BG}%{F$FG}
 }
 
 while :; do
-    echo $(bar)
-    sleep $TIMEOUT
-done | lemonbar -g $SIZE -u $ULINE -f $FONT2 -f $FONT1 -B $BG
+	echo $(bar)
+	sleep $TIMEOUT
+done | lemonbar -g $SIZE -f $FONT2 -f $FONT1 -r $BORDER_WIDTH -R $BORDER_COLOR -B $BG -u 0

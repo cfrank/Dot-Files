@@ -6,32 +6,41 @@ hc() {
     herbstclient "$@"
 }
 
+# Program variables
+TERMINAL=urxvt
+BROWSER=firefox-beta
+FILEMANAGER=nautilus
+COMMANDRUNNER='dmenu_run -l 3 -nb #09090d -nf #839496 -sb #484868 -sf #d9d9fc -fn "Tewi:pixelsize=10"'
+
+# Size Variables
+OUTER_BORDER_WIDTH=1
+BORDER_WIDTH=2
+
+# Color Variables
+ACTIVE_OUTER_BORDER_COLOR='#17171c'
+NORMAL_OUTER_BORDER_COLOR='#17171c'
+ACTIVE_BORDER_COLOR='#383851'
+NORMAL_BORDER_COLOR='#23232a'
+ACTIVE_EMPTY_BORDER_COLOR='#58698c'
+NORMAL_EMPTY_BORDER_COLOR='#7086b2'
+
 hc emit_hook reload
 
 # remove all existing keybindings
 hc keyunbind --all
 
 # keybindings
-# if you have a super key you will be much happier with Mod set to Mod4
 Mod=Mod1    # Use alt as the main modifier
-#Mod=Mod4   # Use the super key as the main modifier
-
-# Define the default terminal
-TERMINAL=urxvt
-# Define the default browser
-BROWSER=firefox-aurora
-# Define the default file manager
-FILEMNGR=nautilus
-#define the default launcher
-LAUNCHER='dmenu_run -fn "Tewi:pixelsize=11"'
 
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
-hc keybind $Mod-Return spawn ${TERMINAL:-xterm} # use your $TERMINAL with xterm as fallback
-hc keybind $Mod-Shift-t spawn ${FILEMNGR} # Used to open the file manager
-hc keybind $Mod-Shift-f spawn ${BROWSER} # Used to open the browser
-hc keybind $Mod-Shift-w spawn ${LAUNCHER} # Used to open the launcher
+hc keybind $Mod-Return spawn $TERMINAL
+hc keybind $Mod-Shift-f spawn $BROWSER
+hc keybind $Mod-Shift-t spawn $FILEMANAGER
+hc keybind $Mod-Shift-s spawn myscrot
+hc keybind $Mod-Shift-w spawn $COMMANDRUNNER
+
 # basic movement
 # focusing clients
 hc keybind $Mod-Left  focus left
@@ -61,7 +70,7 @@ hc keybind $Mod-o       split   right   0.5
 hc keybind $Mod-Control-space split explode
 
 # resizing frames
-resizestep=0.01
+resizestep=0.02
 hc keybind $Mod-Control-h       resize left +$resizestep
 hc keybind $Mod-Control-j       resize down +$resizestep
 hc keybind $Mod-Control-k       resize up +$resizestep
@@ -118,28 +127,34 @@ hc keybind $Mod-i jumpto urgent
 # theme
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
-hc set frame_border_active_color '#2e2e2e'
-hc set frame_border_normal_color '#2e2e2e'
-hc set frame_bg_normal_color '#316b59' # Border of the unactive empty frame
-hc set frame_bg_active_color '#418d76' # Border of the active empty frame
-hc set frame_border_width 1 # The second border - Far outside menu
-hc set always_show_frame 1
+hc set frame_border_active_color black
+hc set frame_border_normal_color black
+hc set frame_bg_normal_color $ACTIVE_BORDER_COLOR
+hc set frame_bg_active_color $ACTIVE_BORDER_COLOR
+hc set frame_border_width 1
+hc set always_show_frame 0
 hc set frame_bg_transparent 1
-hc set frame_transparent_width 3
-hc set frame_gap 20
+hc set frame_transparent_width 1
+hc set frame_gap 10
 
-hc attr theme.active.color '#418d76' # The active main border color
-hc attr theme.normal.color '#316b59' # The unactive main border color
-hc attr theme.urgent.color '#974f3c' # The urgent main border color
-hc attr theme.inner_width 0 # Inside border (Cuts off the main border if over 1)
-hc attr theme.inner_color '#000000'
-hc attr theme.border_width 3
-hc attr theme.floating.border_width 3
-hc attr theme.floating.outer_width 1 # Far outside border (Cuts off main border if over 1)
-hc attr theme.floating.outer_color '#202020' # Color of far outside border
-hc attr theme.active.inner_color '#3E4A00'
-hc attr theme.active.outer_color '#3E4A00'
-hc attr theme.background_color '#141414'
+# Add padding for the panel
+hc pad 0 25 0 0 0
+
+hc attr theme.active.color $ACTIVE_BORDER_COLOR
+hc attr theme.normal.color $NORMAL_BORDER_COLOR
+hc attr theme.urgent.color '#4c0808'
+
+hc attr theme.inner_width 0
+hc attr theme.inner_color black
+hc attr theme.border_width 1
+
+hc attr theme.floating.border_width 2
+hc attr theme.floating.outer_width 1
+hc attr theme.floating.outer_color black
+
+hc attr theme.active.inner_color transparent
+hc attr theme.active.outer_color black
+hc attr theme.background_color transparent
 
 hc set window_gap 0
 hc set frame_padding 0
@@ -158,26 +173,13 @@ hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 
-# Add padding for panel
-hc pad 0 20 0 0 0
-
 # unlock, just to be sure
 hc unlock
 
 herbstclient set tree_style '╾│ ├└╼─┐'
 
-# do multi monitor setup here, e.g.:
-# hc set_monitors 1280x1024+0+0 1280x1024+1280+0
-# or simply:
-# hc detect_monitors
+# do multi monitor setup here
+hc set_monitors 1920x1080+0+0 1920x1080+1920+0
 
-# find the panel
-panel=~/.config/herbstluftwm/panel.sh
-[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
-for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
-    # start it on each monitor
-    "$panel" $monitor &
-done
-
-# Auto start the bar
+# Auto start bar
 bar
