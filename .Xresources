@@ -1,55 +1,49 @@
-!Remove the scroll bar
-URxvt.scrollBar: false
+! Hide the scroll bar
+URxvt.scrollBar:false
 
-! The font
-URxvt*font: -lucy-tewi-medium-r-normal--11-90-100-100-c-60-ISO10646-1
+! URxvt.font: -benis-uushi-medium-R-Normal--11-90-75-75-P-58-ISO10646-1
+! URxvt.font: -lucy-tewi-medium-r-normal--11-90-100-100-c-60-ISO10646-1
+URxvt.font: xft:tewi:pixelsize=8
 
-! Dont use bold fonts they look stupid
+! Dont use a bold font
 URxvt.boldFont:
 
 ! Define the padding
 URxvt.internalBorder: 10
 URxvt.externalBorder: 0
 
-! Make clickable links
+! Make Clickable Links
 URxvt.perl-ext-common: default,matcher
 URxvt*matcher.button: 1
-URxvt.url-launcher: /usr/bin/firefox
-URxvt.colorUL: #81a2be
+URxvt.url-launcher: /usr/bin/firefox-beta
+URxvt.colorUL: #7086b2
 
 ! Colors
-*.foreground:	#c5c8c6
-*.background:	#1d1f21
-*.cursorColor:	#c5c8c6
+*.foreground: #839496
+*.background: #09090d
+*.cursorColor: #839496
 
-! Black
-*.color0:	#282a2e
-*.color8:	#373b41
-
-! Red
-*.color1:	#a54242
-*.color9:	#cc6666
-
-! Green
-*.color2:	#8c9440
-*.color10:	#b5bd68
-
-! Yellow
-*.color3:	#de935f
-*.color11:	#f0c674
-
-! Blue
-*.color4:	#6287a6
-*.color12:	#729fc4
-
-! Magenta
-*.color5:	#6c467a
-*.color13:	#9f5db8
-
-! Cyan
-*.color6:	#467a6a
-*.color14:	#60ac94
-
-! White
-*.color7:	#707880
-*.color15:	#c5c8c6
+! black
+*.color0: #353540
+*.color8: #545466
+! red
+*.color1: #8c5760
+*.color9: #b26f7a
+! green
+*.color2: #7b8c58
+*.color10: #9db270
+! yellow
+*.color3: #8c6e43
+*.color11: #b28c55
+! blue
+*.color4: #58698c
+*.color12: #7086b2
+! magenta
+*.color5: #7b5e7d
+*.color13: #9c77b2
+! cyan
+*.color6: #66808c
+*.color14: #82a2b2
+! white
+*.color7: #8c8b8b
+*.color15: #b8b8c8
