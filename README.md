@@ -4,6 +4,9 @@ My configuration files
 
 ### Items
 
+#### .bashrc
+Bash startup files.
+
 #### .Xresources
 My Xresources file which contains color schemes, terminal fonts, and terminal settings.
 
