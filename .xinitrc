@@ -35,4 +35,5 @@ fi
 feh --bg-center ~/Documents/wallpapers/pixel.jpg
 xset fp+ ~/.fonts
 xset fp rehash
+xbindkeysrc
 exec herbstluftwm
