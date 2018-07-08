@@ -9,6 +9,8 @@
 export VISUAL="vim"
 export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
+export WISENT=~/go/src/github.com/dmitrygrave/wisent
+export WISENTCONFIG=./config/config.dev.json
 
 # Functions
 function myscrot {
@@ -33,7 +35,9 @@ function myscrot {
 # Aliases
 alias ls='ls --color=auto'
 alias sourcedir="cd /home/mysall/HDDStorage/source"
-alias dlaur="cower -vdufq -t /home/mysall/HDDStorage/source/aur"
+alias tmpdir="cd /home/mysall/HDDStorage/tmp"
+alias upm="sudo pacman -Syuu"
+alias dlaur="cower -dufq -t /home/mysall/HDDStorage/source/aur"
 alias aurdir="cd /home/mysall/HDDStorage/source/aur"
 alias ipkg="makepkg -si"
 
