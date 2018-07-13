@@ -9,8 +9,6 @@
 export VISUAL="vim"
 export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
-export WISENT=~/go/src/github.com/dmitrygrave/wisent
-export WISENTCONFIG=./config/config.dev.json
 
 # Functions
 function myscrot {
