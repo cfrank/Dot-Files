@@ -17,17 +17,36 @@ function myscrot {
     FORMAT=".png"
 
     if [ "$1" == "-s" ]; then
-	TYPE="selection"
-	$(scrot -s "$DIR$TIMESTAMP$TYPE$FORMAT")
+        TYPE="selection"
+        $(scrot -s "$DIR$TIMESTAMP$TYPE$FORMAT")
     elif [ "$1" == "-w" ]; then
-	TYPE="window"
-	$(scrot -u -b "$DIR$TIMESTAMP$TYPE$FORMAT")
+        TYPE="window"
+        $(scrot -u -b "$DIR$TIMESTAMP$TYPE$FORMAT")
     elif [ "$#" == 0 ]; then
-	TYPE="screen"
-	$(scrot "$DIR$TIMESTAMP$TYPE$FORMAT")
+        TYPE="screen"
+        $(scrot "$DIR$TIMESTAMP$TYPE$FORMAT")
     else
-	echo "Invalid arguments, use original scrot command"
+        echo "Invalid arguments, use original scrot command"
     fi
+}
+
+function init_ssh_keys {
+    echo "Initializing ssh-agent..."
+
+    eval $(ssh-agent -s)
+
+    for filename in ~/.ssh/id_rsa*; do
+        # Only want private keys
+        [[ $filename == *.pub ]] && continue
+
+        kernel=$(uname -s)
+
+        if [[ $kernel -eq Darwin ]]; then
+            eval $(ssh-add -K $filename)
+        elif [[ $kernel -eq Linux ]]; then
+            eval $(ssh-add $filename)
+        fi
+    done
 }
 
 # Aliases
