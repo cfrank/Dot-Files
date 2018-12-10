@@ -41,9 +41,11 @@ function init_ssh_keys {
 
         kernel=$(uname -s)
 
-        if [[ $kernel -eq Darwin ]]; then
+        echo $kernel
+
+        if [[ "$kernel" == "Darwin" ]]; then
             eval $(ssh-add -K $filename)
-        elif [[ $kernel -eq Linux ]]; then
+        elif [[ "$kernel" == "Linux" ]]; then
             eval $(ssh-add $filename)
         fi
     done
