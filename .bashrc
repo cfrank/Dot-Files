@@ -51,12 +51,16 @@ function init_ssh_keys {
 
 # Aliases
 alias ls='ls --color=auto'
-alias sourcedir="cd /home/mysall/HDDStorage/source"
-alias tmpdir="cd /home/mysall/HDDStorage/tmp"
+alias sourcedir="cd /home/mysall/HDDStorage/source;pwd"
+alias tmpdir="cd /home/mysall/HDDStorage/tmp;pwd"
+alias scrotdir="cd /home/mysall/HDDStorage/scrots;pwd"
 alias upm="sudo pacman -Syuu"
 alias dlaur="cower -dufq -t /home/mysall/HDDStorage/source/aur"
 alias aurdir="cd /home/mysall/HDDStorage/source/aur"
 alias ipkg="makepkg -si"
+alias clion="run-clion-fix-sigint-bug"
+alias rsclient="cd /home/mysall/HDDStorage/source/rsps/sources/Game-Client;pwd"
+alias rsserver="cd /home/mysall/HDDStorage/source/rsps/sources/saturn;pwd"
 
 # PS1
 PS1='[\u@\h \W]\$ '
