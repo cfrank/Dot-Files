@@ -39,22 +39,35 @@ set relativenumber
 set cmdheight=2
 set so=7
 set colorcolumn=81
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " netrw settings
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
+let g:netrw_browse_split = 2
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_sort_options = "i"
 let g:netrw_list_hide = '\.o$, \.obj$,'
 let g:netrw_list_hide .= '\.a$, \.so$, \.lib$,'
+
 augroup ProjectDrawer
     autocmd!
-    autocmd VimEnter * :Vexplore
+    autocmd VimEnter .* :Lexplore
 augroup END
+
 
 " Clang-Format
 autocmd FileType c ClangFormatAutoEnable
+
+" Re-Maps
+nnoremap - :Vexplore<CR>
+nnoremap <C-j> j<C-e>
+nnoremap <C-k> k<C-y>
+
+map <silent> <C-w>H <C-w><
+map <silent> <C-w>J <C-w>-
+map <silent> <C-w>K <C-w>+
+map <silent> <C-w>L <C-w>>
 
 set ruler
