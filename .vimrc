@@ -71,7 +71,6 @@ nnoremap = :10new<CR>:term ++curwin<CR>
 nnoremap + :55vnew<CR>:term ++curwin<CR>
 tnoremap <Esc> <C-\><C-n>
 
-
 " Move viewport as well as cursor
 nnoremap <C-j> j<C-e>
 nnoremap <C-k> k<C-y>
