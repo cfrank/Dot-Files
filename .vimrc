@@ -9,7 +9,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'rhysd/vim-clang-format'
 call plug#end()
 
-" Treat *.h files as pure c not cpp
+" Treat *.{c,h} files as pure c not cpp
 augroup project
     autocmd!
     autocmd BufRead,BufNewFile *.h,*.c set filetype=c
@@ -27,6 +27,8 @@ set magic
 set showmatch
 set mat=2
 set wildmenu
+set splitbelow
+set splitright
 
 " Filetype/Syntax
 filetype plugin indent on
@@ -43,7 +45,7 @@ set wrap
 " Editor look
 set number
 set relativenumber
-set cmdheight=2
+set cmdheight=1
 set so=7
 set colorcolumn=81
 highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -63,6 +65,13 @@ autocmd FileType c ClangFormatAutoEnable
 
 " Re-Maps
 nnoremap - :Lexplore<CR>
+
+" Term
+nnoremap = :10new<CR>:term ++curwin<CR>
+nnoremap + :55vnew<CR>:term ++curwin<CR>
+tnoremap <Esc> <C-\><C-n>
+
+
 " Move viewport as well as cursor
 nnoremap <C-j> j<C-e>
 nnoremap <C-k> k<C-y>
