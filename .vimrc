@@ -7,6 +7,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rhysd/vim-clang-format'
+Plug 'AlessandroYorba/Alduin'
 call plug#end()
 
 " Treat *.{c,h} files as pure c not cpp
@@ -29,6 +30,7 @@ set mat=2
 set wildmenu
 set splitbelow
 set splitright
+set backspace=2
 
 " Filetype/Syntax
 filetype plugin indent on
@@ -48,6 +50,9 @@ set relativenumber
 set cmdheight=1
 set so=7
 set colorcolumn=81
+set list
+set listchars=tab:≫\ 
+colorscheme alduin
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " netrw settings
