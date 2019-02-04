@@ -5,6 +5,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rhysd/vim-clang-format'
 Plug 'AlessandroYorba/Alduin'
@@ -52,8 +53,8 @@ set so=7
 set colorcolumn=81
 set list
 set listchars=tab:≫\ 
+let g:alduin_Shout_Become_Ethereal = 1
 colorscheme alduin
-highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " netrw settings
 let g:netrw_banner = 0
