@@ -3,7 +3,8 @@ URxvt.scrollBar:false
 
 ! URxvt.font: -benis-uushi-medium-R-Normal--11-90-75-75-P-58-ISO10646-1
 ! URxvt.font: -lucy-tewi-medium-r-normal--11-90-100-100-c-60-ISO10646-1
-URxvt.font: xft:tewi:pixelsize=8
+! URxvt.font: xft:tewi:pixelsize=8
+URxvt.font: xft:DejaVu Sans Mono:size=11
 
 ! Dont use a bold font
 URxvt.boldFont:
