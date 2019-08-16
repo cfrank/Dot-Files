@@ -51,6 +51,7 @@ function init_ssh_keys {
 
 # Aliases
 alias ls='ls --color=auto'
+alias gsm='git commit -a -s -S'
 alias sourcedir="cd /home/mysall/HDDStorage/source;pwd"
 alias tmpdir="cd /home/mysall/HDDStorage/tmp;pwd"
 alias scrotdir="cd /home/mysall/HDDStorage/scrots;pwd"
@@ -61,6 +62,8 @@ alias ipkg="makepkg -si"
 alias clion="run-clion-fix-sigint-bug"
 alias rsclient="cd /home/mysall/HDDStorage/source/rsps/sources/Game-Client;pwd"
 alias rsserver="cd /home/mysall/HDDStorage/source/rsps/sources/saturn;pwd"
+alias natwm="sourcedir;cd c/natwm;pwd"
+alias valgrind="valgrind --leak-check=full --show-leak-kinds=all"
 
 # PS1
 PS1='[\u@\h \W]\$ '
