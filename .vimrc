@@ -8,7 +8,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rhysd/vim-clang-format'
-Plug 'AlessandroYorba/Alduin'
+Plug 'AlessandroYorba/Arcadia'
+Plug 'wincent/command-t'
 call plug#end()
 
 " Treat *.{c,h} files as pure c not cpp
@@ -32,6 +33,8 @@ set wildmenu
 set splitbelow
 set splitright
 set backspace=2
+set foldmethod=syntax
+set foldnestmax=1
 
 " Filetype/Syntax
 filetype plugin indent on
@@ -53,8 +56,8 @@ set so=7
 set colorcolumn=81
 set list
 set listchars=tab:≫\ 
-let g:alduin_Shout_Become_Ethereal = 1
-colorscheme alduin
+let g:arcadia_Pitch = 1
+colorscheme arcadia
 
 " netrw settings
 let g:netrw_banner = 0
@@ -66,11 +69,16 @@ let g:netrw_sort_options = "i"
 let g:netrw_list_hide = '\.o$, \.obj$,'
 let g:netrw_list_hide .= '\.a$, \.so$, \.lib$,'
 
+" Command-t file fuzzy finding
+nnoremap <C-f> :CommandT<CR>
+
 " Clang-Format
 autocmd FileType c ClangFormatAutoEnable
 
 " Re-Maps
 nnoremap - :Lexplore<CR>
+nnoremap fg :vertical wincmd f<CR>
+nnoremap <S-z> za
 
 " Term
 nnoremap = :10new<CR>:term ++curwin<CR>
