@@ -19,6 +19,7 @@ augroup project
 augroup END
 
 " Editor functionality
+set encoding=utf8
 set history=500
 set autoread
 set ignorecase
@@ -58,6 +59,7 @@ set list
 set listchars=tab:≫\ 
 let g:arcadia_Pitch = 1
 colorscheme arcadia
+hi MatchParen cterm=bold ctermbg=none ctermfg=red
 
 " netrw settings
 let g:netrw_banner = 0
