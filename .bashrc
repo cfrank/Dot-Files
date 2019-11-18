@@ -38,7 +38,7 @@ alias rm='echo Use "del", or the full path i.e. "/bin/rm"'
 alias del='rmtrash'
 
 if [[ $kernel == "Linux" ]]; then
-	alias ls='ls --color-auto'
+    alias ls='ls --color-auto'
     alias sourcedir="cd /home/mysall/HDDStorage/source;pwd"
     alias tmpdir="cd /home/mysall/HDDStorage/tmp;pwd"
     alias scrotdir="cd /home/mysall/HDDStorage/scrots;pwd"
@@ -52,7 +52,7 @@ if [[ $kernel == "Linux" ]]; then
     alias natwm="sourcedir;cd c/natwm;pwd"
     alias valgrind="valgrind --leak-check=full --show-leak-kinds=all"
 elif [[ $kernel == "Darwin" ]]; then
-	alias ls='ls -FG'
+    alias ls='ls -FG'
     alias sourcedir="cd /Users/ccfrank/source; pwd"
     alias jsdir="sourcedir;cd js/;pwd"
     alias godir="sourcedir;cd go/;pwd"
