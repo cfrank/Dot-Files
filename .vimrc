@@ -36,6 +36,7 @@ set splitright
 set backspace=2
 set foldmethod=syntax
 set foldnestmax=1
+set nofoldenable
 
 " Filetype/Syntax
 filetype plugin indent on
