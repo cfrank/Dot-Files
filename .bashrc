@@ -15,6 +15,25 @@ if [ -x "$(command -v go)" ]; then
 	export GOPATH=$(go env GOPATH)
 fi
 
+function myscrot {
+    DIR='/home/eindex/Documents/scrots/'
+    TIMESTAMP='%Y-%m-%d-%H%M%S_$wx$h_'
+    FORMAT='.png'
+
+    if [ "$1" == "-s" ]; then
+        TYPE="selection"
+        $(scrot -s "$DIR$TIMESTAMP$TYPE$FORMAT")
+    elif [ "$1" == "-w" ]; then
+        TYPE="window"
+        $(scrot -u -b "$DIR$TIMESTAMP$TYPE$FORMAT")
+    elif [ "$#" == 0 ]; then
+        TYPE="screen"
+        $(scrot "$DIR$TIMESTAMP$TYPE$FORMAT")
+    else
+        echo "Invalid arguments, use original scrot command"
+    fi
+}
+
 function init_ssh_keys {
     echo "Initializing ssh-agent..."
 
@@ -33,7 +52,7 @@ function init_ssh_keys {
 }
 
 # Aliases
-alias gsm='git commit -a -s -S'
+alias gsm='git commit -s -S'
 alias rm='echo Use "del", or the full path i.e. "/bin/rm"'
 alias del='rmtrash'
 
@@ -41,9 +60,9 @@ if [[ $kernel == "Linux" ]]; then
     alias ls='ls --color=auto'
     alias sourcedir="cd ~/source;pwd"
     alias tmpdir="sourcedir;cd tmp;pwd"
-    alias scrotdir="cd /home/mysall/HDDStorage/scrots;pwd"
+    alias scrotdir="cd ~/Documents/scrots;pwd"
     alias upm="sudo pacman -Syuu"
-    alias natwm="sourcedir;cd c/natwm;pwd"
+    alias natwmdir="sourcedir;cd c/natwm;pwd"
     alias valgrind="valgrind --leak-check=full --show-leak-kinds=all"
 elif [[ $kernel == "Darwin" ]]; then
     alias ls='ls -FG'
