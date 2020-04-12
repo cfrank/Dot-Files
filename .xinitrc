@@ -35,5 +35,9 @@ fi
 feh --bg-center ~/Documents/wallpapers/pixel.jpg
 xset fp+ ~/.fonts
 xset fp rehash
-xbindkeys
+# xbindkeys
+
+xrandr --output eDP-1-1 --auto --left-of DP-0 --output DP-0
+
+#~/source/c/natwm/build/bin/natwm 2> ~/.natwmlog
 exec herbstluftwm

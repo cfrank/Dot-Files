@@ -52,24 +52,25 @@ function init_ssh_keys {
 }
 
 # Aliases
+alias del='rmtrash'
 alias gsm='git commit -s -S'
 alias rm='echo Use "del", or the full path i.e. "/bin/rm"'
-alias del='rmtrash'
 
 if [[ $kernel == "Linux" ]]; then
     alias ls='ls --color=auto'
+    alias lsblk="lsblk -o NAME,MAJ:MIN,RM,SIZE,FSUSE%,RO,TYPE,MOUNTPOINT,PARTLABEL"
+    alias natwmdir="sourcedir;cd c/natwm;pwd"
+    alias scrotdir="cd ~/Documents/scrots;pwd"
     alias sourcedir="cd ~/source;pwd"
     alias tmpdir="sourcedir;cd tmp;pwd"
-    alias scrotdir="cd ~/Documents/scrots;pwd"
-    alias upm="sudo pacman -Syuu"
-    alias natwmdir="sourcedir;cd c/natwm;pwd"
+    alias upm="yay -Syuu"
     alias valgrind="valgrind --leak-check=full --show-leak-kinds=all"
 elif [[ $kernel == "Darwin" ]]; then
-    alias ls='ls -FG'
-    alias sourcedir="cd /Users/ccfrank/source; pwd"
-    alias jsdir="sourcedir;cd js/;pwd"
     alias godir="sourcedir;cd go/;pwd"
+    alias jsdir="sourcedir;cd js/;pwd"
+    alias ls='ls -FG'
     alias personaldir="cd /Users/ccfrank/personal; pwd"
+    alias sourcedir="cd /Users/ccfrank/source; pwd"
     alias valgrind="valgrind --leak-check=full --show-leak-kinds=definite,indirect"
 fi
 

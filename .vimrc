@@ -34,9 +34,10 @@ set wildmenu
 set splitbelow
 set splitright
 set backspace=2
-set foldmethod=syntax
+set foldmethod=indent
 set foldnestmax=1
 set nofoldenable
+let g:CommandTFileScanner = "git"
 
 " Filetype/Syntax
 filetype plugin indent on
@@ -57,7 +58,6 @@ set cmdheight=1
 set so=7
 set colorcolumn=81
 set list
-set listchars=tab:≫\ 
 let g:arcadia_Pitch = 1
 colorscheme arcadia
 hi MatchParen cterm=bold ctermbg=none ctermfg=red
@@ -89,8 +89,8 @@ nnoremap + :55vnew<CR>:term ++curwin<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " Move viewport as well as cursor
-nnoremap <C-j> j<C-e>
-nnoremap <C-k> k<C-y>
+nnoremap <C-j> 5j<C-e>
+nnoremap <C-k> 5k<C-y>
 
 " Move horizontally around splits
 nnoremap <C-h> <C-w>h
