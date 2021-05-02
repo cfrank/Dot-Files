@@ -1,4 +1,3 @@
-# vim: ts=4 syntax=sh
 #!/usr/bin/env bash
 
 # Text font
@@ -37,49 +36,65 @@ FG="#d9d9fc"
 BORDER_COLOR=$BG
 
 function bar {
-	function icon {
-		ICON="\ue19d"
-		echo -e %{B$IB}%{F$FG} $ICON%{F-}
-	}
+    function icon {
+        ICON="\ue19d"
+        echo -e %{B$IB}%{F$FG} $ICON%{F-}
+    }
 
-	function desktop {
-		CURRENT=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
+    function desktop {
+        CURRENT=$(xprop -root _NET_CURRENT_DESKTOP | awk '{print $3}')
 
-		# With the current desktop we update the indicator
-		case $CURRENT in
-			0) echo -e %{B$BG}%{F$FG} +------%{F-};;
-			1) echo -e %{B$BG}%{F$FG} -+-----%{F-};;
-			2) echo -e %{B$BG}%{F$FG} --+----%{F-};;
-			3) echo -e %{B$BG}%{F$FG} ---+---%{F-};;
-			4) echo -e %{B$BG}%{F$FG} ----+--%{F-};;
-			5) echo -e %{B$BG}%{F$FG} -----+-%{F-};;
-			6) echo -e %{B$BG}%{F$FG} ------+%{F-}
-		esac
-	}
+        # With the current desktop we update the indicator
+        case $CURRENT in
+            0) echo -e %{B$BG}%{F$FG} +------%{F-};;
+            1) echo -e %{B$BG}%{F$FG} -+-----%{F-};;
+            2) echo -e %{B$BG}%{F$FG} --+----%{F-};;
+            3) echo -e %{B$BG}%{F$FG} ---+---%{F-};;
+            4) echo -e %{B$BG}%{F$FG} ----+--%{F-};;
+            5) echo -e %{B$BG}%{F$FG} -----+-%{F-};;
+            6) echo -e %{B$BG}%{F$FG} ------+%{F-}
+        esac
+    }
 
-	function window {
-		# Requires xdotool
-		WINDOW=$(xdotool getwindowfocus getwindowname)
+    function window {
+        # Requires xdotool
+        WINDOW=$(xdotool getwindowfocus getwindowname)
 
-		echo %{F"#839496"}$WINDOW
-	}
+        echo %{F"#839496"}$WINDOW
+    }
 
-	function calendar {
-		ICON="\ue267"
-		CALENDAR=$(date "+%a %m/%d/%Y")
-		echo -e %{B$IB}%{F$FG} $ICON %{B$CB}%{F$FG} $CALENDAR%{F-}
-	}
+    function keyboard {
+        ICON="\ue26f"
+        CODE=$(xset -q | grep LED | awk '{ print $10 }')
 
-	function watch {
-		ICON="\ue0a3"
-		WATCH=$(date "+%H:%M")
-		echo -e %{B$IB}%{F$FG} $ICON %{B$CB}%{F$FG} $WATCH%{F-}
-	}
+        # Convert keyboard layout code to string
+        case $CODE in
+            "00000000") LAYOUT="US";;
+            "00001000") LAYOUT="RU";;
+            *)          LAYOUT="??"
+        esac
 
-	echo -e %{l}$(icon) $(desktop) %{c}$(window) %{r}$(calendar) %{B$BG} $(watch) %{B$BG}%{F$FG}
+        echo -e %{B$IB}%{F$FG} $ICON %{B$CB}%{F%FG} $LAYOUT%{F-}
+    }
+
+    function calendar {
+        ICON="\ue267"
+        CALENDAR=$(date "+%a %m/%d/%Y")
+        echo -e %{B$IB}%{F$FG} $ICON %{B$CB}%{F$FG} $CALENDAR%{F-}
+    }
+
+    function watch {
+        ICON="\ue0a3"
+        WATCH=$(date "+%H:%M")
+        echo -e %{B$IB}%{F$FG} $ICON %{B$CB}%{F$FG} $WATCH%{F-}
+    }
+
+    echo -e \
+        %{l}$(icon) $(desktop) %{c}$(window) \
+        %{r}$(keyboard) %{B$BG} $(calendar) %{B$BG} $(watch) %{B$BG}%{F$FG}
 }
 
 while :; do
-	echo $(bar)
-	sleep $TIMEOUT
-done | lemonbar -g $SIZE -f $FONT2 -f $FONT1 -r $BORDER_WIDTH -R $BORDER_COLOR -B $BG -u 0
+    echo $(bar)
+    sleep $TIMEOUT
+done | lemonbar -g $SIZE -f $FONT2 -f $FONT1 -B $BG -u 0
