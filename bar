@@ -70,7 +70,9 @@ function bar {
         # Convert keyboard layout code to string
         case $CODE in
             "00000000") LAYOUT="US";;
+            "00000001") LAYOUT="US*";;
             "00001000") LAYOUT="RU";;
+            "00001001") LAYOUT="RU*";;
             *)          LAYOUT="??"
         esac
 
