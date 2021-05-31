@@ -1,0 +1,37 @@
+# Workspace switching
+alt + {0-9}
+    wmctrl -s {0-9}
+
+# Workspace teleporting
+alt + shift + {0-9}
+    wmctrl -r :ACTIVE: -t {0-9}
+
+# Close current window
+alt + shift + c
+    xdotool getwindowfocus windowkill
+
+# Kill window manager
+alt + shift + q
+    pkill natwm
+
+# Applications
+
+# Open terminal
+alt + Return
+    urxvt
+
+# Open FireFox
+alt + shift + f
+    firefox
+
+# Open dmenu
+alt + shift + w
+    dmenu_run_script
+
+# Decrease master volume
+alt + Next
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# Increase master volume
+alt + Prior
+    pactl set-sink-volume @DEFAULT_SINK@ +5%

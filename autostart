@@ -6,15 +6,23 @@ hc() {
     herbstclient "$@"
 }
 
+# Keybind functions
+set_master_volume() {
+    MODIFIED_MASTER_VOLUME='-5%'
+
+    if [ $1 = true ]; then
+        MODIFIED_MASTER_VOLUME='+5%'
+    fi
+
+    echo "pactl set-sink-volume @DEFAULT_SINK@ ${MODIFIED_MASTER_VOLUME}"
+}
+
 # Program variables
 TERMINAL=urxvt
-BROWSER=firefox-beta
-FILEMANAGER=nautilus
+BROWSER=firefox
+FILEMANAGER=thunar
 COMMANDRUNNER='dmenu_run -l 3 -nb #09090d -nf #839496 -sb #484868 -sf #d9d9fc -fn "Tewi:pixelsize=10"'
 
-# Size Variables
-OUTER_BORDER_WIDTH=1
-BORDER_WIDTH=2
 
 # Color Variables
 ACTIVE_OUTER_BORDER_COLOR='#17171c'
@@ -40,6 +48,8 @@ hc keybind $Mod-Shift-f spawn $BROWSER
 hc keybind $Mod-Shift-t spawn $FILEMANAGER
 hc keybind $Mod-Shift-s spawn myscrot
 hc keybind $Mod-Shift-w spawn $COMMANDRUNNER
+hc keybind $Mod-Prior spawn $(set_master_volume true)
+hc keybind $Mod-Next spawn $(set_master_volume false)
 
 # basic movement
 # focusing clients
