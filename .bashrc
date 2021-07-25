@@ -14,24 +14,27 @@ if [ -x "$(command -v go)" ]; then
 	export PATH=$PATH:$(go env GOPATH)/bin
 	export GOPATH=$(go env GOPATH)
 fi
+export CC=gcc
 
 function myscrot {
-    DIR='/home/eindex/Documents/scrots/'
-    TIMESTAMP='%Y-%m-%d-%H%M%S_$wx$h_'
-    FORMAT='.png'
+    DIR="$HOME/Documents/scrots/"
+    TIMESTAMP='%Y-%m-%d-%H%M%S_$wx$h'
+    FORMAT='png'
+    TYPE='screen'
+    ARGS=''
 
     if [ "$1" == "-s" ]; then
-        TYPE="selection"
-        $(scrot -s "$DIR$TIMESTAMP$TYPE$FORMAT")
+        TYPE='selection'
+        ARGS='-s'
     elif [ "$1" == "-w" ]; then
-        TYPE="window"
-        $(scrot -u -b "$DIR$TIMESTAMP$TYPE$FORMAT")
-    elif [ "$#" == 0 ]; then
-        TYPE="screen"
-        $(scrot "$DIR$TIMESTAMP$TYPE$FORMAT")
-    else
+        TYPE='window'
+        ARGS='-u -b'
+    elif [ "$#" != 0 ]; then
         echo "Invalid arguments, use original scrot command"
+        exit 1
     fi
+
+    $(scrot $ARGS "$DIR$TIMESTAMP\_$TYPE.$FORMAT")
 }
 
 function init_ssh_keys {
@@ -55,16 +58,22 @@ function init_ssh_keys {
 alias del='rmtrash'
 alias gsm='git commit -s -S'
 alias rm='echo Use "del", or the full path i.e. "/bin/rm"'
+alias sshc='ssh cfrank@45.33.64.43 -p 1404'
+alias vpnc='nordvpn c San_Francisco'
+alias godir='cd $GOPATH;pwd'
+alias nja='ninja'
 
 if [[ $kernel == "Linux" ]]; then
     alias ls='ls --color=auto'
-    alias lsblk="lsblk -o NAME,MAJ:MIN,RM,SIZE,FSUSE%,RO,TYPE,MOUNTPOINT,PARTLABEL"
+    alias lsblk="lsblk -o NAME,MAJ:MIN,RM,SIZE,FSUSE%,FSTYPE,RO,TYPE,MOUNTPOINT,PARTLABEL"
     alias natwmdir="sourcedir;cd c/natwm;pwd"
+    alias alogdir="godir;cd src/github.com/alog-rs;pwd"
     alias scrotdir="cd ~/Documents/scrots;pwd"
     alias sourcedir="cd ~/source;pwd"
     alias tmpdir="sourcedir;cd tmp;pwd"
+    alias pkgdir="sourcedir;cd pkg;pwd"
     alias upm="yay -Syuu"
-    alias valgrind="valgrind --leak-check=full --show-leak-kinds=all"
+    alias valgrind="valgrind --leak-check=full --show-leak-kinds=definite,indirect"
 elif [[ $kernel == "Darwin" ]]; then
     alias godir="sourcedir;cd go/;pwd"
     alias jsdir="sourcedir;cd js/;pwd"
@@ -80,6 +89,8 @@ PS1='[\u@\h \W]\$ '
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+source /usr/share/nvm/init-nvm.sh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
