@@ -15,6 +15,7 @@ if [ -x "$(command -v go)" ]; then
 	export GOPATH=$(go env GOPATH)
 fi
 export CC=gcc
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
 
 function myscrot {
     DIR="$HOME/Documents/scrots/"
@@ -37,42 +38,17 @@ function myscrot {
     $(scrot $ARGS "$DIR$TIMESTAMP\_$TYPE.$FORMAT")
 }
 
-function init_ssh_keys {
-    echo "Initializing ssh-agent..."
-
-    eval $(ssh-agent -s)
-
-    for filename in ~/.ssh/id_rsa*; do
-        # Only want private keys
-        [[ $filename == *.pub ]] && continue
-
-        if [[ "$kernel" == "Darwin" ]]; then
-            eval $(ssh-add -K $filename)
-        elif [[ "$kernel" == "Linux" ]]; then
-            eval $(ssh-add $filename)
-        fi
-    done
-}
-
 # Aliases
-alias del='rmtrash'
 alias gsm='git commit -s -S'
-alias rm='echo Use "del", or the full path i.e. "/bin/rm"'
-alias sshc='ssh cfrank@45.33.64.43 -p 1404'
-alias vpnc='nordvpn c San_Francisco'
 alias godir='cd $GOPATH;pwd'
 alias nja='ninja'
 
 if [[ $kernel == "Linux" ]]; then
     alias ls='ls --color=auto'
     alias lsblk="lsblk -o NAME,MAJ:MIN,RM,SIZE,FSUSE%,FSTYPE,RO,TYPE,MOUNTPOINT,PARTLABEL"
-    alias natwmdir="sourcedir;cd c/natwm;pwd"
-    alias alogdir="godir;cd src/github.com/alog-rs;pwd"
     alias scrotdir="cd ~/Documents/scrots;pwd"
     alias sourcedir="cd ~/source;pwd"
     alias tmpdir="sourcedir;cd tmp;pwd"
-    alias pkgdir="sourcedir;cd pkg;pwd"
-    alias upm="yay -Syuu"
     alias valgrind="valgrind --leak-check=full --show-leak-kinds=definite,indirect"
 elif [[ $kernel == "Darwin" ]]; then
     alias godir="sourcedir;cd go/;pwd"
@@ -86,11 +62,6 @@ fi
 
 # PS1
 PS1='[\u@\h \W]\$ '
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-source /usr/share/nvm/init-nvm.sh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
