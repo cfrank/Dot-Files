@@ -39,6 +39,7 @@ function myscrot {
 }
 
 # Aliases
+alias cmake='cmake -GNINJA'
 alias gsm='git commit -s -S'
 alias godir='cd $GOPATH;pwd'
 alias nja='ninja'
