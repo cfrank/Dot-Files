@@ -10,12 +10,18 @@ kernel=$(uname -s)
 
 # Exports
 export VISUAL="vim"
+export HISTSIZE=50000
 if [ -x "$(command -v go)" ]; then
 	export PATH=$PATH:$(go env GOPATH)/bin
 	export GOPATH=$(go env GOPATH)
 fi
+export PATH="$HOME/.local/bin:$HOME/source/tmp/cef_devel/depot_tools:$PATH"
 export CC=gcc
-export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
+
+# Chromium/CEF exports
+export GN_DEFINES="use_sysroot=false symbol_level=2 is_cfi=false use_thin_lto=false use_vaapi=false use_gnome_keyring=false enable_nacl=false blink_symbol_level=0"
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig"
 
 function myscrot {
     DIR="$HOME/Documents/scrots/"
@@ -39,24 +45,24 @@ function myscrot {
 }
 
 # Aliases
-alias cmake='cmake -GNINJA'
+alias cmake='cmake -GNinja'
 alias gsm='git commit -s -S'
 alias godir='cd $GOPATH;pwd'
 alias nja='ninja'
 
 if [[ $kernel == "Linux" ]]; then
-    alias ls='ls --color=auto'
+    alias ls='ls -lah --color=auto'
     alias lsblk="lsblk -o NAME,MAJ:MIN,RM,SIZE,FSUSE%,FSTYPE,RO,TYPE,MOUNTPOINT,PARTLABEL"
-    alias scrotdir="cd ~/Documents/scrots;pwd"
-    alias sourcedir="cd ~/source;pwd"
+    alias scrotdir="cd $HOME/Documents/scrots;pwd"
+    alias sourcedir="cd $HOME/source;pwd"
     alias tmpdir="sourcedir;cd tmp;pwd"
     alias valgrind="valgrind --leak-check=full --show-leak-kinds=definite,indirect"
 elif [[ $kernel == "Darwin" ]]; then
     alias godir="sourcedir;cd go/;pwd"
     alias jsdir="sourcedir;cd js/;pwd"
     alias ls='ls -FG'
-    alias personaldir="cd /Users/ccfrank/personal; pwd"
-    alias sourcedir="cd /Users/ccfrank/source; pwd"
+    alias personaldir="cd $HOME/personal; pwd"
+    alias sourcedir="cd $HOME/source; pwd"
     alias valgrind="valgrind --leak-check=full --show-leak-kinds=definite,indirect"
 fi
 

@@ -37,6 +37,8 @@ set backspace=2
 set foldmethod=indent
 set foldnestmax=1
 set nofoldenable
+set visualbell
+set noerrorbells
 let g:CommandTFileScanner = "git"
 
 " Filetype/Syntax
