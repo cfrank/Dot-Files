@@ -7,6 +7,7 @@
 
 # Allow for system checking
 kernel=$(uname -s)
+kernel_release=$(uname -r)
 
 # Exports
 export VISUAL="vim"
@@ -57,6 +58,11 @@ if [[ $kernel == "Linux" ]]; then
     alias sourcedir="cd $HOME/source;pwd"
     alias tmpdir="sourcedir;cd tmp;pwd"
     alias valgrind="valgrind --leak-check=full --show-leak-kinds=definite,indirect"
+
+    if [[ $kernel_release =~ "WSL2" ]]; then
+        alias ssh="ssh.exe"
+        alias ssh-add="ssh-add.exe"
+    fi
 elif [[ $kernel == "Darwin" ]]; then
     alias godir="sourcedir;cd go/;pwd"
     alias jsdir="sourcedir;cd js/;pwd"
