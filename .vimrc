@@ -8,8 +8,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rhysd/vim-clang-format'
-Plug 'AlessandroYorba/Arcadia'
-Plug 'wincent/command-t'
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
 " Treat *.{c,h} files as pure c not cpp
@@ -19,6 +18,7 @@ augroup project
 augroup END
 
 " Editor functionality
+set ruler
 set encoding=utf8
 set history=500
 set autoread
@@ -39,7 +39,6 @@ set foldnestmax=1
 set nofoldenable
 set visualbell
 set noerrorbells
-let g:CommandTFileScanner = "git"
 
 " Filetype/Syntax
 filetype plugin indent on
@@ -58,10 +57,9 @@ set number
 set relativenumber
 set cmdheight=1
 set so=7
-set colorcolumn=81
-set list
-let g:arcadia_Pitch = 1
-colorscheme arcadia
+set colorcolumn=120
+set background=dark
+colorscheme solarized
 hi MatchParen cterm=bold ctermbg=none ctermfg=red
 
 " netrw settings
@@ -73,9 +71,6 @@ let g:netrw_winsize = 20
 let g:netrw_sort_options = "i"
 let g:netrw_list_hide = '\.o$, \.obj$,'
 let g:netrw_list_hide .= '\.a$, \.so$, \.lib$,'
-
-" Command-t file fuzzy finding
-nnoremap <C-f> :CommandT<CR>
 
 " Clang-Format
 autocmd FileType c ClangFormatAutoEnable
@@ -103,4 +98,3 @@ map <silent> <C-w>J <C-w>-
 map <silent> <C-w>K <C-w>+
 map <silent> <C-w>L <C-w>>
 
-set ruler
