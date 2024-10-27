@@ -42,9 +42,11 @@ function myscrot {
 }
 
 # Aliases
-alias cmake='cmake -GNinja'
 alias gsm='git commit -s -S'
+alias gpf='git push --force-with-lease'
+alias gpr='git pull --rebase'
 alias godir='cd $GOPATH;pwd'
+alias cmake='cmake -GNinja'
 alias nja='ninja'
 
 if [[ $kernel == "Linux" ]]; then
