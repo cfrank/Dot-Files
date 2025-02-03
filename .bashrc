@@ -6,18 +6,19 @@ kernel=$(uname -s)
 kernel_release=$(uname -r)
 
 # Exports
-export VISUAL="vim"
+export VISUAL="hx"
 export HISTSIZE=50000
 if [ -x "$(command -v go)" ]; then
-	export PATH=$PATH:$(go env GOPATH)/bin
-	export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$(go env GOPATH)/bin
+export GOPATH=$(go env GOPATH)
 fi
 export PATH="$HOME/.local/bin:$HOME/source/tmp/cef_devel/depot_tools:$PATH"
+export PATH="/usr/share/swift/swift-6.0.3-RELEASE-ubuntu24.04/usr/bin:$PATH"
 export CC=gcc
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 
 # Chromium/CEF exports
-export GN_DEFINES="use_sysroot=false symbol_level=2 is_cfi=false use_thin_lto=false use_vaapi=false use_gnome_keyring=false enable_nacl=false blink_symbol_level=0"
+export GN_DEFINES="use_sysroot=false symbol_level=2 is_cfi=false use_thin_lto=false use_vaapi=false enable_nacl=false blink_symbol_level=0"
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/lib/x86_64-linux-gnu/pkgconfig"
 
 function myscrot {
